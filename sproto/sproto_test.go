@@ -4,8 +4,21 @@ import (
 	"math"
 	"testing"
 
-	sproto "github.com/davyxu/gosproto"
+	convert "go.szyhf.org/di-convert"
+	"go.szyhf.org/digo/log"
+
+	sproto "github.com/szyhf/gosproto"
 )
+
+func TestEncodeSProto(t *testing.T) {
+	msg := newValMsg()
+	d, e := sproto.EncodePacked(msg)
+	log.Debug("EncodePackedProto3.Len=", len(d), e)
+
+	dMsg := &ValMSG{}
+	sproto.DecodePacked(d, dMsg)
+	log.Debug(convert.MustJsonString(dMsg))
+}
 
 func BenchmarkSProtoEncodeVal(b *testing.B) {
 	b.StopTimer()
@@ -45,8 +58,8 @@ func BenchmarkSProtoDecodePackedVal(b *testing.B) {
 	}
 }
 
-func newValMsg() ValMSG {
-	return ValMSG{
+func newValMsg() *ValMSG {
+	return &ValMSG{
 		Int:         math.MaxInt64,
 		IntNeg:      math.MinInt32 + 1,
 		String:      "Hello",
