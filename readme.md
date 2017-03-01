@@ -4,11 +4,16 @@
 
 Just a simple bench for some serialization in golang.
 
-## 支持（Support）
+## 已实现（Exist）
 
-现在只实现了“gosproto”和“protobuf.v3"的压测，更多的信息可以尝试找找相关目录中的readme.md（我不一定写了=。=）
++ xjdrew/gosproto
++ szyhf/go-sproto
++ google/proto.v3
++ thinylib/msgp
 
-Now just finished "gosproto" and "google/proto.v3", more info try look at inner readme in directory.
+更多的信息可以尝试找找相关目录中的readme.md（我不一定写了=。=）
+
+More info try look at inner readme in directory.
 
 ## 使用（Usage）
 
