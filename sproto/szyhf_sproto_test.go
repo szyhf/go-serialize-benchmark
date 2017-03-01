@@ -4,7 +4,7 @@ import (
 	"math"
 	"testing"
 
-	sproto "github.com/szyhf/gosproto"
+	sproto "github.com/szyhf/go-sproto"
 )
 
 func BenchmarkSZYHFEncodeSproto(b *testing.B) {
