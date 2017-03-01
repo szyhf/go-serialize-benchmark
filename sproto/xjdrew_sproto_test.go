@@ -46,7 +46,7 @@ func BenchmarkDecodeSproto(b *testing.B) {
 		b.Errorf("sproto.Encode failed:", err)
 		return
 	}
-	nMsg := new(PtrMSG)
+	nMsg := new(PtrMsg)
 	_, err = sproto.Decode(d, nMsg)
 	if err != nil {
 		b.Errorf("sproto.Decode failed:", err)
@@ -80,7 +80,7 @@ func BenchmarkDecodePackedSproto(b *testing.B) {
 		b.Errorf("sproto.EncodePacked failed:", err)
 		return
 	}
-	nMsg := new(PtrMSG)
+	nMsg := new(PtrMsg)
 	err = sproto.DecodePacked(d, nMsg)
 	if err != nil {
 		b.Errorf("sproto.DecodePacked failed:", err)
@@ -92,8 +92,8 @@ func BenchmarkDecodePackedSproto(b *testing.B) {
 	}
 }
 
-func newMsg() *PtrMSG {
-	return &PtrMSG{
+func newMsg() *PtrMsg {
+	return &PtrMsg{
 		Int:         sproto.Int(math.MaxInt64),
 		IntNeg:      sproto.Int(math.MinInt32 + 1),
 		String:      sproto.String("Hello"),
@@ -102,7 +102,7 @@ func newMsg() *PtrMSG {
 		BoolSlice:   []bool{true, true, false, true, false},
 		IntSlice:    []int{123, 321, 1234567},
 		StringSlice: []string{"FOO", "BAR"},
-		Struct: &HoldPtrMSG{
+		Struct: &HoldPtrMsg{
 			Int:         sproto.Int(1),
 			String:      sproto.String("Hello"),
 			Bool:        sproto.Bool(true),
@@ -111,8 +111,8 @@ func newMsg() *PtrMSG {
 			IntSlice:    []int{123, 321, 1234567},
 			StringSlice: []string{"FOO", "BAR"},
 		},
-		StructSlice: []*HoldPtrMSG{
-			&HoldPtrMSG{
+		StructSlice: []*HoldPtrMsg{
+			&HoldPtrMsg{
 				Int:         sproto.Int(2),
 				String:      sproto.String("Hello2"),
 				Bool:        sproto.Bool(true),
@@ -121,7 +121,7 @@ func newMsg() *PtrMSG {
 				IntSlice:    []int{123, 321, 1234567},
 				StringSlice: []string{"FOO2", "BAR2"},
 			},
-			&HoldPtrMSG{
+			&HoldPtrMsg{
 				Int:         sproto.Int(3),
 				String:      sproto.String("Hello3"),
 				Bool:        sproto.Bool(true),

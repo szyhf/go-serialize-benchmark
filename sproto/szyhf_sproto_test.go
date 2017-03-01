@@ -29,7 +29,7 @@ func BenchmarkSZYHFDecodeSproto(b *testing.B) {
 		b.Errorf("sproto.Encode failed:", err)
 		return
 	}
-	nMsg := new(ValMSG)
+	nMsg := new(ValMsg)
 	_, err = sproto.Decode(d, nMsg)
 	if err != nil {
 		b.Errorf("sproto.Decode failed:", err)
@@ -63,7 +63,7 @@ func BenchmarkSZYHFDecodePackedSproto(b *testing.B) {
 		b.Errorf("sproto.EncodePacked failed:", err)
 		return
 	}
-	nMsg := new(ValMSG)
+	nMsg := new(ValMsg)
 	err = sproto.DecodePacked(d, nMsg)
 	if err != nil {
 		b.Errorf("sproto.DecodePacked failed:", err)
@@ -75,8 +75,8 @@ func BenchmarkSZYHFDecodePackedSproto(b *testing.B) {
 	}
 }
 
-func newValMsg() *ValMSG {
-	return &ValMSG{
+func newValMsg() *ValMsg {
+	return &ValMsg{
 		Int:         math.MaxInt64,
 		IntNeg:      math.MinInt32 + 1,
 		Str:         "Hello",
@@ -85,7 +85,7 @@ func newValMsg() *ValMSG {
 		BoolSlice:   []bool{true, true, false, true, false},
 		IntSlice:    []int{123, 321, 1234567},
 		StringSlice: []string{"FOO", "BAR"},
-		Struct: &HoldValMSG{
+		Struct: &HoldValMsg{
 			Int:         1,
 			Str:         "Hello",
 			Bool:        true,
@@ -94,8 +94,8 @@ func newValMsg() *ValMSG {
 			IntSlice:    []int{123, 321, 1234567},
 			StringSlice: []string{"FOO", "BAR"},
 		},
-		StructSlice: []*HoldValMSG{
-			&HoldValMSG{
+		StructSlice: []*HoldValMsg{
+			&HoldValMsg{
 				Int:         2,
 				Str:         "Hello2",
 				Bool:        true,
@@ -104,7 +104,7 @@ func newValMsg() *ValMSG {
 				IntSlice:    []int{123, 321, 1234567},
 				StringSlice: []string{"FOO2", "BAR2"},
 			},
-			&HoldValMSG{
+			&HoldValMsg{
 				Int:         3,
 				Str:         "Hello3",
 				Bool:        true,
