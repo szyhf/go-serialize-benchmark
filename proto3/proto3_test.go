@@ -14,7 +14,7 @@ func TestEncodeProto3(t *testing.T) {
 		t.Error(e)
 		return
 	}
-	t.Log("EncodeProto3.Len=", len(d), e)
+	t.Log("EncodeProto3.Len=", len(d))
 
 	dMsg := &ValMsg{}
 	proto.Unmarshal(d, dMsg)
