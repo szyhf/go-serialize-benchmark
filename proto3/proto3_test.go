@@ -4,22 +4,20 @@ import (
 	"math"
 	"testing"
 
-	convert "go.szyhf.org/di-convert"
-	"go.szyhf.org/digo/log"
-
-	"encoding/json"
-
 	"github.com/golang/protobuf/proto"
 )
 
 func TestEncodeProto3(t *testing.T) {
 	msg := newValMsg()
 	d, e := proto.Marshal(msg)
-	log.Debug("EncodeProto3.Len=", len(d), e)
+	if e != nil {
+		t.Error(e)
+		return
+	}
+	t.Log("EncodeProto3.Len=", len(d), e)
 
 	dMsg := &ValMsg{}
 	proto.Unmarshal(d, dMsg)
-	log.Debug(convert.MustJsonString(dMsg))
 }
 
 func BenchmarkEncodeProto3(b *testing.B) {
@@ -38,7 +36,7 @@ func BenchmarkDecodeProto3(b *testing.B) {
 	nMsg := &ValMsg{}
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		json.Unmarshal(d, nMsg)
+		proto.Unmarshal(d, nMsg)
 	}
 }
 
