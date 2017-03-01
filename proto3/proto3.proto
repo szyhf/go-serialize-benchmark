@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+message ValMsg {
+	 int64 Int = 1;
+	 string Str = 2;
+	 bool Bool = 3;
+	 bytes ByteSlice = 4;
+	 repeated bool BoolSlice = 6;
+	 repeated int64 IntSlice = 7;
+	 repeated string StringSlice = 8;
+	 HoldValMsg Struct = 9;
+	 repeated HoldValMsg StructSlice = 10;
+	 int64 IntNeg = 11;
+}
+
+message HoldValMsg {
+	int64 Int = 12;
+	string Str = 13;
+	bool Bool = 14;
+	bytes ByteSlice = 15;
+	repeated bool BoolSlice = 16;
+	repeated int64 IntSlice = 17;
+	repeated string StringSlice = 18;
+}
