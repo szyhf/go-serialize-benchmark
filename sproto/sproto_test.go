@@ -62,7 +62,7 @@ func newValMsg() *ValMSG {
 	return &ValMSG{
 		Int:         math.MaxInt64,
 		IntNeg:      math.MinInt32 + 1,
-		String:      "Hello",
+		Str:         "Hello",
 		Bool:        true,
 		ByteSlice:   []byte("World"),
 		BoolSlice:   []bool{true, true, false, true, false},
@@ -70,7 +70,7 @@ func newValMsg() *ValMSG {
 		StringSlice: []string{"FOO", "BAR"},
 		Struct: &HoldValMSG{
 			Int:         1,
-			String:      "Hello",
+			Str:         "Hello",
 			Bool:        true,
 			ByteSlice:   []byte("World"),
 			BoolSlice:   []bool{true, true, false, true, false},
@@ -80,7 +80,7 @@ func newValMsg() *ValMSG {
 		StructSlice: []*HoldValMSG{
 			&HoldValMSG{
 				Int:         2,
-				String:      "Hello2",
+				Str:         "Hello2",
 				Bool:        true,
 				ByteSlice:   []byte("World2"),
 				BoolSlice:   []bool{true, true, false, true, false},
@@ -89,7 +89,7 @@ func newValMsg() *ValMSG {
 			},
 			&HoldValMSG{
 				Int:         3,
-				String:      "Hello3",
+				Str:         "Hello3",
 				Bool:        true,
 				ByteSlice:   []byte("World3"),
 				BoolSlice:   []bool{true, true, false, true, false},

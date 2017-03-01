@@ -25,7 +25,7 @@ type HoldPtrMSG struct {
 
 type ValMSG struct {
 	Int         int           `sproto:"integer,0,name=Int"`
-	String      string        `sproto:"string,1,name=String"`
+	Str         string        `sproto:"string,1,name=Str"`
 	Bool        bool          `sproto:"boolean,2,name=Bool"`
 	Struct      *HoldValMSG   `sproto:"struct,3,name=Struct"`
 	ByteSlice   []byte        `sproto:"string,4,name=ByteSlice"`
@@ -38,7 +38,7 @@ type ValMSG struct {
 
 type HoldValMSG struct {
 	Int         int      `sproto:"integer,0,name=Int"`
-	String      string   `sproto:"string,1,name=String"`
+	Str         string   `sproto:"string,1,name=Str"`
 	Bool        bool     `sproto:"boolean,2,name=Bool"`
 	ByteSlice   []byte   `sproto:"string,3,name=ByteSlice"`
 	BoolSlice   []bool   `sproto:"boolean,4,array,name=BoolSlice"`
