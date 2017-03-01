@@ -56,5 +56,3 @@ ok      go.szyhf.org/serialize-benchmark/sproto 12.211s
 json
 
 fastjson
-
-msgp
