@@ -6,6 +6,7 @@ Just a simple bench for some serialization in golang.
 
 ## 已实现（Exist）
 
++ google/golang/encoding/json
 + xjdrew/gosproto
 + szyhf/go-sproto
 + google/proto.v3
@@ -136,6 +137,4 @@ ok  	github.com/szyhf/go-serialize-benchmark/sproto	14.238s
 
 ## 计划（Plan）
 
-json
-
-fastjson
+fastjson（忽然找不到那个库了……）
