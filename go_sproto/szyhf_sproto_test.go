@@ -1,4 +1,4 @@
-package sproto
+package go_sproto
 
 import (
 	"math"
