@@ -38,7 +38,7 @@ func BenchmarkDecodeJsonIter(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
 	var d []byte
-	jsoniter.ConfigFastest.Marshal(msg)
+	d, _ = jsoniter.ConfigFastest.Marshal(msg)
 	nMsg := &ValMsg{}
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {

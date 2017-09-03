@@ -37,7 +37,7 @@ func BenchmarkDecodeMsgp(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
 	var d []byte
-	msg.MarshalMsg(d)
+	d, _ = msg.MarshalMsg(d)
 	nMsg := &ValMsg{}
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {

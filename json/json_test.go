@@ -37,7 +37,7 @@ func BenchmarkDecodeJSON(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
 	var d []byte
-	json.Marshal(msg)
+	d, _ = json.Marshal(msg)
 	nMsg := &ValMsg{}
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
