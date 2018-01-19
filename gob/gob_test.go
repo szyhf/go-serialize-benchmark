@@ -1,77 +1,62 @@
-package go_sproto
+package gob
 
 import (
+	"bytes"
+	"encoding/gob"
 	"math"
 	"testing"
-
-	sproto "github.com/szyhf/go-sproto"
 )
 
-func BenchmarkSZYHFEncodeSproto(b *testing.B) {
-	b.StopTimer()
+var buf = bytes.NewBuffer(make([]byte, 1024))
+var encoder *gob.Encoder
+var decoder *gob.Decoder
+
+func init() {
+	gob.Register(new(ValMsg))
+	gob.Register(new(HoldValMsg))
+
+	encoder = gob.NewEncoder(buf)
+	decoder = gob.NewDecoder(buf)
+}
+
+func TestEncodeGob(t *testing.T) {
+	buf.Reset()
 	msg := newValMsg()
-	_, err := sproto.Encode(msg)
+	err := encoder.Encode(msg)
 	if err != nil {
-		b.Error("sproto.Encode failed:", err)
+		t.Error(err)
 		return
 	}
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		sproto.Encode(msg)
+	t.Log("EncodeMsgp.Len=", buf.Len())
+
+	dMsg := &ValMsg{}
+	err = decoder.Decode(dMsg)
+	if err != nil {
+		t.Error(err)
+		return
 	}
 }
 
-func BenchmarkSZYHFDecodeSproto(b *testing.B) {
+func BenchmarkEncodeGob(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
-	d, err := sproto.Encode(msg)
-	if err != nil {
-		b.Error("sproto.Encode failed:", err)
-		return
-	}
-	nMsg := new(ValMsg)
-	_, err = sproto.Decode(d, nMsg)
-	if err != nil {
-		b.Error("sproto.Decode failed:", err)
-		return
-	}
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		sproto.Decode(d, nMsg)
+		encoder.Encode(msg)
+		buf.Reset()
 	}
 }
 
-func BenchmarkSZYHFEncodePackedSproto(b *testing.B) {
+func BenchmarkDecodeGob(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
-	_, err := sproto.EncodePacked(msg)
-	if err != nil {
-		b.Error("sproto.EncodePacked failed:", err)
-		return
+	for i := 0; i < b.N; i++ {
+		encoder.Encode(msg)
 	}
+	nMsg := &ValMsg{}
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		sproto.EncodePacked(msg)
-	}
-}
-
-func BenchmarkSZYHFDecodePackedSproto(b *testing.B) {
-	b.StopTimer()
-	msg := newValMsg()
-	d, err := sproto.EncodePacked(msg)
-	if err != nil {
-		b.Error("sproto.EncodePacked failed:", err)
-		return
-	}
-	nMsg := new(ValMsg)
-	err = sproto.DecodePacked(d, nMsg)
-	if err != nil {
-		b.Error("sproto.DecodePacked failed:", err)
-		return
-	}
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		sproto.DecodePacked(d, nMsg)
+		decoder.Decode(nMsg)
 	}
 }
 

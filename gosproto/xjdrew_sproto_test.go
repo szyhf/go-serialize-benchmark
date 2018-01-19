@@ -29,7 +29,7 @@ func BenchmarkEncodeSproto(b *testing.B) {
 	msg := newMsg()
 	_, err := sproto.Encode(msg)
 	if err != nil {
-		b.Errorf("sproto.Encode failed:", err)
+		b.Error("sproto.Encode failed:", err)
 		return
 	}
 	b.StartTimer()
@@ -43,13 +43,13 @@ func BenchmarkDecodeSproto(b *testing.B) {
 	msg := newMsg()
 	d, err := sproto.Encode(msg)
 	if err != nil {
-		b.Errorf("sproto.Encode failed:", err)
+		b.Error("sproto.Encode failed:", err)
 		return
 	}
 	nMsg := new(PtrMsg)
 	_, err = sproto.Decode(d, nMsg)
 	if err != nil {
-		b.Errorf("sproto.Decode failed:", err)
+		b.Error("sproto.Decode failed:", err)
 		return
 	}
 	b.StartTimer()
@@ -63,7 +63,7 @@ func BenchmarkEncodePackedSproto(b *testing.B) {
 	msg := newMsg()
 	_, err := sproto.EncodePacked(msg)
 	if err != nil {
-		b.Errorf("sproto.EncodePacked failed:", err)
+		b.Error("sproto.EncodePacked failed:", err)
 		return
 	}
 	b.StartTimer()
@@ -77,13 +77,13 @@ func BenchmarkDecodePackedSproto(b *testing.B) {
 	msg := newMsg()
 	d, err := sproto.EncodePacked(msg)
 	if err != nil {
-		b.Errorf("sproto.EncodePacked failed:", err)
+		b.Error("sproto.EncodePacked failed:", err)
 		return
 	}
 	nMsg := new(PtrMsg)
 	err = sproto.DecodePacked(d, nMsg)
 	if err != nil {
-		b.Errorf("sproto.DecodePacked failed:", err)
+		b.Error("sproto.DecodePacked failed:", err)
 		return
 	}
 	b.StartTimer()

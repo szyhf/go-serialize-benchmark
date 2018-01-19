@@ -6,6 +6,7 @@ Just a simple bench for some serialization in golang.
 
 ## 已实现（Exist）
 
++ google/golang/encoding/gob
 + google/golang/encoding/json
 + xjdrew/gosproto
 + szyhf/go-sproto
@@ -95,59 +96,81 @@ func newValMsg() *ValMsg {
 
 ## 我自己机子的结果（My Result）
 
-2017.09.03:
+2018.01.19:
 
-At golang v1.9.
+At golang v1.9.2.
 
 ```txt
+goos: darwin
+goarch: amd64
 pkg: github.com/szyhf/go-serialize-benchmark/go_sproto
-BenchmarkSZYHFEncodeSproto-6         	  200000	      5843 ns/op	    1376 B/op	      36 allocs/op
-BenchmarkSZYHFDecodeSproto-6         	  200000	      6961 ns/op	    3136 B/op	      71 allocs/op
-BenchmarkSZYHFEncodePackedSproto-6   	  200000	      6918 ns/op	    1856 B/op	      37 allocs/op
-BenchmarkSZYHFDecodePackedSproto-6   	  200000	      8326 ns/op	    3808 B/op	      73 allocs/op
+BenchmarkSZYHFEncodeSproto-8              300000              4104 ns/op            1376 B/op         36 allocs/op
+BenchmarkSZYHFDecodeSproto-8              300000              5018 ns/op            3136 B/op         71 allocs/op
+BenchmarkSZYHFEncodePackedSproto-8        300000              4865 ns/op            1856 B/op         37 allocs/op
+BenchmarkSZYHFDecodePackedSproto-8        300000              5889 ns/op            3808 B/op         73 allocs/op
 PASS
-ok  	github.com/szyhf/go-serialize-benchmark/go_sproto	5.949s
+ok      github.com/szyhf/go-serialize-benchmark/go_sproto       6.183s
+=== RUN   TestEncodeGob
+--- PASS: TestEncodeGob (0.00s)
+        gob_test.go:30: EncodeMsgp.Len= 571
+goos: darwin
+goarch: amd64
+pkg: github.com/szyhf/go-serialize-benchmark/gob
+BenchmarkEncodeGob-8      500000              3684 ns/op             384 B/op         12 allocs/op
+BenchmarkDecodeGob-8      300000              4809 ns/op            1048 B/op         42 allocs/op
+PASS
+ok      github.com/szyhf/go-serialize-benchmark/gob     4.651s
 === RUN   TestEncodeSproto
 --- PASS: TestEncodeSproto (0.00s)
-	xjdrew_sproto_test.go:17: SprotoEncode.Len= 362
-	xjdrew_sproto_test.go:24: SprotoEncodePacked.Len= 213
+        xjdrew_sproto_test.go:17: SprotoEncode.Len= 362
+        xjdrew_sproto_test.go:24: SprotoEncodePacked.Len= 213
+goos: darwin
+goarch: amd64
 pkg: github.com/szyhf/go-serialize-benchmark/gosproto
-BenchmarkEncodeSproto-6         	  300000	      5245 ns/op	    1376 B/op	      36 allocs/op
-BenchmarkDecodeSproto-6         	  200000	      8082 ns/op	    3168 B/op	      76 allocs/op
-BenchmarkEncodePackedSproto-6   	  300000	      6423 ns/op	    1856 B/op	      37 allocs/op
-BenchmarkDecodePackedSproto-6   	  200000	      9271 ns/op	    3840 B/op	      78 allocs/op
+BenchmarkEncodeSproto-8                   300000              3707 ns/op            1376 B/op         36 allocs/op
+BenchmarkDecodeSproto-8                   300000              6112 ns/op            3168 B/op         76 allocs/op
+BenchmarkEncodePackedSproto-8             300000              4641 ns/op            1856 B/op         37 allocs/op
+BenchmarkDecodePackedSproto-8             200000              6845 ns/op            3840 B/op         78 allocs/op
 PASS
-ok  	github.com/szyhf/go-serialize-benchmark/gosproto	8.334s
+ok      github.com/szyhf/go-serialize-benchmark/gosproto        5.940s
 === RUN   TestEncodeJSON
 --- PASS: TestEncodeJSON (0.00s)
-	json_test.go:17: EncodeMsgp.Len= 697
+        json_test.go:17: EncodeMsgp.Len= 697
+goos: darwin
+goarch: amd64
 pkg: github.com/szyhf/go-serialize-benchmark/json
-BenchmarkEncodeJSON-6   	  200000	      7109 ns/op	    2368 B/op	       9 allocs/op
-BenchmarkDecodeJSON-6   	   50000	     23929 ns/op	     544 B/op	      37 allocs/op
+BenchmarkEncodeJSON-8             300000              4977 ns/op            2368 B/op          9 allocs/op
+BenchmarkDecodeJSON-8             100000             20016 ns/op             544 B/op         37 allocs/op
 PASS
-ok  	github.com/szyhf/go-serialize-benchmark/json	2.950s
+ok      github.com/szyhf/go-serialize-benchmark/json    3.758s
 === RUN   TestEncodeJsonIter
 --- PASS: TestEncodeJsonIter (0.00s)
-	json_iterator_test.go:18: EncodeMsgp.Len= 697
+        json_iterator_test.go:18: EncodeMsgp.Len= 697
+goos: darwin
+goarch: amd64
 pkg: github.com/szyhf/go-serialize-benchmark/json_iterator
-BenchmarkEncodeJsonIter-6   	  300000	      3670 ns/op	     720 B/op	       2 allocs/op
-BenchmarkDecodeJsonIter-6   	  300000	      4889 ns/op	     208 B/op	      20 allocs/op
+BenchmarkEncodeJsonIter-8         500000              2700 ns/op             720 B/op          2 allocs/op
+BenchmarkDecodeJsonIter-8         300000              4344 ns/op             256 B/op         24 allocs/op
 PASS
-ok  	github.com/szyhf/go-serialize-benchmark/json_iterator	2.686s
+ok      github.com/szyhf/go-serialize-benchmark/json_iterator   2.739s
 === RUN   TestEncodeMsgp
 --- PASS: TestEncodeMsgp (0.00s)
-	msgp_test.go:16: EncodeMsgp.Len= 428
+        msgp_test.go:16: EncodeMsgp.Len= 428
+goos: darwin
+goarch: amd64
 pkg: github.com/szyhf/go-serialize-benchmark/msgp
-BenchmarkEncodeMsgp-6            2000000               750 ns/op             640 B/op          1 allocs/op
-BenchmarkDecodeMsgp-6            1000000              1585 ns/op              56 B/op         12 allocs/op
+BenchmarkEncodeMsgp-8            3000000               506 ns/op             640 B/op          1 allocs/op
+BenchmarkDecodeMsgp-8            1000000              1290 ns/op              56 B/op         12 allocs/op
 PASS
-ok  	github.com/szyhf/go-serialize-benchmark/msgp	4.700s
+ok      github.com/szyhf/go-serialize-benchmark/msgp    3.357s
 === RUN   TestEncodeProto3
 --- PASS: TestEncodeProto3 (0.00s)
-	proto3_test.go:17: EncodeProto3.Len= 217
+        proto3_test.go:17: EncodeProto3.Len= 217
+goos: darwin
+goarch: amd64
 pkg: github.com/szyhf/go-serialize-benchmark/proto3
-BenchmarkEncodeProto3-6   	  500000	      2494 ns/op	    1576 B/op	      15 allocs/op
-BenchmarkDecodeProto3-6   	  500000	      3992 ns/op	    1160 B/op	      46 allocs/op
+BenchmarkEncodeProto3-8          1000000              1726 ns/op            1576 B/op         15 allocs/op
+BenchmarkDecodeProto3-8           500000              2646 ns/op            1160 B/op         46 allocs/op
 PASS
-ok  	github.com/szyhf/go-serialize-benchmark/proto3	3.323s
+ok      github.com/szyhf/go-serialize-benchmark/proto3  3.108s
 ```
