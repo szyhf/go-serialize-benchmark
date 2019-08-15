@@ -4,10 +4,10 @@ import (
 	"math"
 	"testing"
 
-	"github.com/json-iterator/go"
+	jsoniter "github.com/json-iterator/go"
 )
 
-func TestEncodeJsonIter(t *testing.T) {
+func TestEncodeJSONIter(t *testing.T) {
 	msg := newValMsg()
 	var d []byte
 	d, err := jsoniter.ConfigFastest.Marshal(msg)
@@ -15,7 +15,7 @@ func TestEncodeJsonIter(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	t.Log("EncodeMsgp.Len=", len(d))
+	t.Log("EncodeJSONIter.Len=", len(d))
 
 	dMsg := &ValMsg{}
 	err = jsoniter.ConfigFastest.Unmarshal(d, dMsg)
@@ -25,7 +25,7 @@ func TestEncodeJsonIter(t *testing.T) {
 	}
 }
 
-func BenchmarkEncodeJsonIter(b *testing.B) {
+func BenchmarkEncodeJSONIter(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
 	b.StartTimer()
@@ -34,7 +34,7 @@ func BenchmarkEncodeJsonIter(b *testing.B) {
 	}
 }
 
-func BenchmarkDecodeJsonIter(b *testing.B) {
+func BenchmarkDecodeJSONIter(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
 	var d []byte

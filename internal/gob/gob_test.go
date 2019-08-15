@@ -27,7 +27,7 @@ func TestEncodeGob(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	t.Log("EncodeMsgp.Len=", buf.Len())
+	t.Log("EncodeGob.Len=", buf.Len())
 
 	dMsg := &ValMsg{}
 	err = decoder.Decode(dMsg)

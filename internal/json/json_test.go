@@ -14,7 +14,7 @@ func TestEncodeJSON(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	t.Log("EncodeMsgp.Len=", len(d))
+	t.Log("EncodeJSON.Len=", len(d))
 
 	dMsg := &ValMsg{}
 	err = json.Unmarshal(d, dMsg)

@@ -1,46 +1,48 @@
-package easyjson
+package msgp
 
 import (
 	"math"
 	"testing"
+
+	"github.com/vmihailenco/msgpack"
 )
 
-func TestEncodeEasyJSON(t *testing.T) {
+func TestEncodeVmihailencoMsgp(t *testing.T) {
 	msg := newValMsg()
 	var d []byte
-	d, err := msg.MarshalJSON()
+	d, err := msgpack.Marshal(msg)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	t.Log("EncodeEasyJSON.Len=", len(d))
+	t.Log("EncodeVmihailencoMsgp.Len=", len(d))
 
 	dMsg := &ValMsg{}
-	err = dMsg.UnmarshalJSON(d)
+	err = msgpack.Unmarshal(d, dMsg)
 	if err != nil {
 		t.Error(err)
 		return
 	}
 }
 
-func BenchmarkEncodeEasyJSON(b *testing.B) {
+func BenchmarkEncodeVmihailencoMsgp(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		msg.MarshalJSON()
+		msgpack.Marshal(msg)
 	}
 }
 
-func BenchmarkDecodeEasyJSON(b *testing.B) {
+func BenchmarkDecodeVmihailencoMsgp(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
 	var d []byte
-	d, _ = msg.MarshalJSON()
+	d, _ = msgpack.Marshal(msg)
 	nMsg := &ValMsg{}
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		nMsg.UnmarshalJSON(d)
+		msgpack.Unmarshal(d, nMsg)
 	}
 }
 

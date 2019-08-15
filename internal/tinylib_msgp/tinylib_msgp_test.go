@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestEncodeMsgp(t *testing.T) {
+func TestEncodeTinylibMsgp(t *testing.T) {
 	msg := newValMsg()
 	var d []byte
 	d, err := msg.MarshalMsg(d)
@@ -13,7 +13,7 @@ func TestEncodeMsgp(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	t.Log("EncodeMsgp.Len=", len(d))
+	t.Log("EncodeTinylibMsgp.Len=", len(d))
 
 	dMsg := &ValMsg{}
 	d, err = dMsg.UnmarshalMsg(d)
@@ -23,7 +23,7 @@ func TestEncodeMsgp(t *testing.T) {
 	}
 }
 
-func BenchmarkEncodeMsgp(b *testing.B) {
+func BenchmarkEncodeTinylibMsgp(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
 	b.StartTimer()
@@ -33,7 +33,7 @@ func BenchmarkEncodeMsgp(b *testing.B) {
 	}
 }
 
-func BenchmarkDecodeMsgp(b *testing.B) {
+func BenchmarkDecodeTinylibMsgp(b *testing.B) {
 	b.StopTimer()
 	msg := newValMsg()
 	var d []byte
